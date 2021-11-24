@@ -8,9 +8,6 @@ print(logo)
 # Randomly choose a word from the word_list and assign it to a variable called chosen_word.
 chosen_word = random.choice(word_list)
 
-# Testing code
-print(f'Pssst, the solution is {chosen_word}.')
-
 # creates a list filled with "_" for every letting in chosen_word
 display = []
 for ch in chosen_word:
@@ -23,6 +20,9 @@ while "_" in display and lives > 0:
     # Ask the user to guess a letter and assign their answer to a variable called guess. Make guess lowercase.
     guess = input("Guess a letter?: ").lower()
 
+    if guess in display:
+        print(f"You've already guessed {guess}")
+
     # Loop through each position in the chosen_word, If the letter at that position matches 'guess' then reveal that
     # letter in the display at that position.
     for i in range(len(chosen_word)):
@@ -31,6 +31,7 @@ while "_" in display and lives > 0:
 
     # if the letter is not in the chosen word, reduce number of lives
     if guess not in chosen_word:
+        print(f"You've guessed {guess}, which is not in the word.")
         lives -= 1
 
     print(f"{' '.join(display)}")
@@ -38,4 +39,5 @@ while "_" in display and lives > 0:
 if lives > 0:
     print("\nYou win!")
 else:
-    print("\nYou lost!")
+    print(stages[0])
+    print("You lost!")
