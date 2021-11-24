@@ -1,64 +1,9 @@
 # HANGMAN
 import random
+from hangman_art import stages, logo
+from hangman_words import word_list
 
-stages = ['''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
-''']
-
-word_list = ["aardvark", "baboon", "camel"]
+print(logo)
 
 # Randomly choose a word from the word_list and assign it to a variable called chosen_word.
 chosen_word = random.choice(word_list)
@@ -80,18 +25,17 @@ while "_" in display and lives > 0:
 
     # Loop through each position in the chosen_word, If the letter at that position matches 'guess' then reveal that
     # letter in the display at that position.
-    letter_found = False
     for i in range(len(chosen_word)):
         if chosen_word[i] == guess:
             display[i] = guess
-            letter_found = True
 
-    if not letter_found:
+    # if the letter is not in the chosen word, reduce number of lives
+    if guess not in chosen_word:
         lives -= 1
 
-    print(display)
+    print(f"{' '.join(display)}")
 
 if lives > 0:
-    print("You win!")
+    print("\nYou win!")
 else:
-    print("You lost!")
+    print("\nYou lost!")
